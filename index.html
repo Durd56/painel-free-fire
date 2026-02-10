@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Login Gamer</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle,#0a0000,#000);
+  font-family:Arial;
+}
+.box{
+  background:#120000;
+  padding:30px;
+  width:300px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 0 25px red;
+}
+h2{color:red;}
+input{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+  border:none;
+  border-radius:6px;
+}
+button{
+  width:100%;
+  padding:10px;
+  background:red;
+  border:none;
+  border-radius:6px;
+  font-weight:bold;
+}
+.msg{color:#ff5555;}
+</style>
+</head>
+
+<body>
+<div class="box">
+<h2>🔥 LOGIN 🔥</h2>
+
+<input id="user" placeholder="Usuário">
+<input id="pass" type="password" placeholder="Senha">
+
+<button onclick="login()">ENTRAR</button>
+<p class="msg" id="msg"></p>
+</div>
+
+<script>
+/* 🔐 ALTERE AQUI */
+const USUARIO = "admin";
+const SENHA = "ff123";
+
+function login(){
+  if(user.value === USUARIO && pass.value === SENHA){
+    localStorage.setItem("logado","sim");
+    location.href="painel.html";
+  }else{
+    msg.innerText="Usuário ou senha incorretos";
+  }
+}
+</script>
+</body>
+</html>
