@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<style><style>
+<style>
 body {
   background: #000;
   font-family: Arial, sans-serif;
@@ -149,6 +149,15 @@ function login(){
   }else{
     msg.innerText="Usuário ou senha incorretos";
   }
+}
+</script>
+  <script>
+function ativar() {
+  document.getElementById("status").innerText = "Status: ATIVADO";
+}
+
+function desativar() {
+  document.getElementById("status").innerText = "Status: DESLIGADO";
 }
 </script>
 </body>
