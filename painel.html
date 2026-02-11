@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Painel Free Fire</title>
-
-  <style>
+<meta charset="UTF-8">
+<title>Painel Free Fire</title>
+<style>
     body {
       background: #000;
       font-family: Arial, sans-serif;
@@ -56,18 +55,17 @@
       color: white;
       font-size: 16px;
     }
-  </style>
+</style>
 </head>
-
 <body>
 
   <div class="box">
-    <h2>🔥 PAINEL FF 🔥</h2>
+  <h2>🔥 PAINEL FF 🔥</h2>
 
     <button class="on" onclick="ativar()">AIM ON</button>
     <button class="off" onclick="desativar()">AIM OFF</button>
 
-    <p id="status">Status: DESLIGADO</p>
+  <p id="status">Status: DESLIGADO</p>
   </div>
 
   <script>
@@ -78,7 +76,6 @@
     function desativar() {
       document.getElementById("status").innerText = "Status: DESLIGADO";
     }
-  </script>
-
+</script>
 </body>
 </html>
