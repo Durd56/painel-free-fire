@@ -1,176 +1,162 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<style>
-  body {
-  background: radial-gradient(circle, #0f0f0f, #000);
-  font-family: Arial, sans-serif;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-}
+  <meta charset="UTF-8">
+  <title>Login Gamer</title>
+  <style>
+    /* ===== BODY ===== */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #0a0000, #000);
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
 
-.painel {
-  margin-top: 50px;
-}
+    /* ===== CENTRALIZAÇÃO ===== */
+    .page-center {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
 
-.btn {
-  padding: 15px 30px;
-  margin: 10px;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  color: white;
-}
+    /* ===== LOGIN BOX ===== */
+    .login-box {
+      background: #120000;
+      padding: 30px;
+      width: 300px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 25px red;
+    }
 
-.on {
-  background: #00ff00;
-  box-shadow: 0 0 15px #00ff00;
-}
+    .login-box h2 {
+      color: red;
+      margin-bottom: 20px;
+    }
 
-.off {
-  background: #ff0000;
-  box-shadow: 0 0 15px #ff0000;
-}
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid red;
+      border-radius: 6px;
+      background: #000;
+      color: white;
+    }
 
-#status {
-  color: white;
-  margin-top: 20px;
-  font-size: 18px;
-}
-  .page-center {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-}
-.login-box {
-  max-width: 320px;
-  width: 90%;
-}
-</style>
-body {
-  <body>
-  <div class="page-center">
-}
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.login-box {
-  ...
-  max-width: 320px;
-  width: 90%;
-}
-}
+    .login-box .msg {
+      color: #ff5555;
+      margin-top: 10px;
+    }
 
-h2 {
-  color: #ff0000;
-}
+    /* ===== PAINEL ===== */
+    .painel {
+      margin-top: 50px;
+      text-align: center;
+    }
 
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  background: #000;
-  border: 1px solid red;
-  color: white;
-}
+    .btn {
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      color: white;
+    }
 
-button {
-  background: red;
-  color: white;
-  border: none;
-  padding: 12px;
-  width: 100%;
-  cursor: pointer;
-}
-</style>
-<meta charset="UTF-8">
-<title>Login Gamer</title>
-<style>
-body{
-  <h2 style="color:red; text-align:center;">🔥 PAINEL FREE FIRE 🔥</h2>
+    .on {
+      background: #00ff00;
+      box-shadow: 0 0 15px #00ff00;
+    }
 
-<div class="painel">
-  <button class="btn on" onclick="ativar()">AIM ON</button>
-  <button class="btn off" onclick="desativar()">AIM OFF</button>
+    .off {
+      background: #ff0000;
+      box-shadow: 0 0 15px #ff0000;
+    }
 
-  <p id="status">Status: DESLIGADO</p>
-</div>
-  margin:0;
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:radial-gradient(circle,#0a0000,#000);
-  font-family:Arial;
-}
-.box{
-  background:#120000;
-  padding:30px;
-  width:300px;
-  border-radius:12px;
-  text-align:center;
-  box-shadow:0 0 25px red;
-}
-h2{color:red;}
-input{
-  width:100%;
-  padding:10px;
-  margin:10px 0;
-  border:none;
-  border-radius:6px;
-}
-button{
-  width:100%;
-  padding:10px;
-  background:red;
-  border:none;
-  border-radius:6px;
-  font-weight:bold;
-}
-.msg{color:#ff5555;}
-</style>
+    #status {
+      color: white;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
 </head>
-
 <body>
   <div class="page-center">
-    <div class="login-box">
+    <!-- ===== LOGIN ===== -->
+    <div class="login-box" id="login-box">
+      <h2>🔥 PAINEL FREE FIRE 🔥</h2>
+      <input id="user" placeholder="Usuário">
+      <input id="pass" type="password" placeholder="Senha">
+      <button onclick="login()">ENTRAR</button>
+      <p class="msg" id="msg"></p>
+    </div>
 
-<input id="user" placeholder="Usuário">
-<input id="pass" type="password" placeholder="Senha">
+    <!-- ===== PAINEL ===== -->
+    <div class="painel" id="painel" style="display:none;">
+      <button class="btn on" onclick="ativar()">AIM ON</button>
+      <button class="btn off" onclick="desativar()">AIM OFF</button>
+      <p id="status">Status: DESLIGADO</p>
+    </div>
+  </div>
 
-<button onclick="login()">ENTRAR</button>
-<p class="msg" id="msg"></p>
-</div>
-
-<script>
-/* 🔐 ALTERE AQUI */
-const USUARIO = "eduoliveer";
-const SENHA = "956774740@Ab";
-
-function login(){
-  if(user.value === USUARIO && pass.value === SENHA){
-    localStorage.setItem("logado","sim");
-    location.href="painel.html";
-  }else{
-    msg.innerText="Usuário ou senha incorretos";
-  }
-}
-</script>
   <script>
-function ativar() {
-  document.getElementById("status").innerText = "Status: ATIVADO";
-}
+    /* ===== LOGIN ===== */
+    const USUARIO = "eduoliveer";
+    const SENHA = "956774740@Ab";
 
-function desativar() {
-  document.getElementById("status").innerText = "Status: DESLIGADO";
-}
-</script>
-</div>
+    function login() {
+      const userInput = document.getElementById("user").value;
+      const passInput = document.getElementById("pass").value;
+      const msg = document.getElementById("msg");
+      const loginBox = document.getElementById("login-box");
+      const painel = document.getElementById("painel");
+
+      if(userInput === USUARIO && passInput === SENHA) {
+        localStorage.setItem("logado", "sim");
+        // Mostrar painel e esconder login
+        loginBox.style.display = "none";
+        painel.style.display = "block";
+      } else {
+        msg.innerText = "Usuário ou senha incorretos";
+      }
+    }
+
+    /* ===== PAINEL ===== */
+    function ativar() {
+      document.getElementById("status").innerText = "Status: ATIVADO";
+    }
+
+    function desativar() {
+      document.getElementById("status").innerText = "Status: DESLIGADO";
+    }
+
+    /* ===== MANTER LOGIN ===== */
+    window.onload = function() {
+      if(localStorage.getItem("logado") === "sim") {
+        document.getElementById("login-box").style.display = "none";
+        document.getElementById("painel").style.display = "block";
+      }
+    }
+  </script>
 </body>
 </html>
