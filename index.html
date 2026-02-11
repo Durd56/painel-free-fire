@@ -1,162 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Login Gamer</title>
-  <style>
-    /* ===== BODY ===== */
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle, #0a0000, #000);
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<title>Aim Trainer FF + Presets</title>
+<style>
+body{
+  margin:0;
+  background:#000;
+  color:#fff;
+  font-family:Arial;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
 
-    /* ===== CENTRALIZAÇÃO ===== */
-    .page-center {
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-    }
+/* ===== PAINEL ===== */
+.painel{
+  margin-top:20px;
+  background:#111;
+  border:2px solid red;
+  box-shadow:0 0 20px red;
+  padding:20px;
+  border-radius:12px;
+  width:90%;
+  max-width:360px;
+  text-align:center;
+}
 
-    /* ===== LOGIN BOX ===== */
-    .login-box {
-      background: #120000;
-      padding: 30px;
-      width: 300px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 0 25px red;
-    }
+button{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    .login-box h2 {
-      color: red;
-      margin-bottom: 20px;
-    }
+.rush{background:#ff0000;color:#fff;}
+.capa{background:#00ff00;color:#000;}
+.sniper{background:#00aaff;color:#fff;}
 
-    .login-box input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid red;
-      border-radius: 6px;
-      background: #000;
-      color: white;
-    }
+.info{
+  margin-top:10px;
+  font-size:14px;
+}
 
-    .login-box button {
-      width: 100%;
-      padding: 12px;
-      background: red;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+/* ===== AIM TRAINER ===== */
+#arena{
+  margin-top:20px;
+  width:90%;
+  max-width:360px;
+  height:360px;
+  border:2px solid #fff;
+  position:relative;
+  overflow:hidden;
+}
 
-    .login-box .msg {
-      color: #ff5555;
-      margin-top: 10px;
-    }
-
-    /* ===== PAINEL ===== */
-    .painel {
-      margin-top: 50px;
-      text-align: center;
-    }
-
-    .btn {
-      padding: 15px 30px;
-      margin: 10px;
-      font-size: 18px;
-      border: none;
-      cursor: pointer;
-      border-radius: 8px;
-      color: white;
-    }
-
-    .on {
-      background: #00ff00;
-      box-shadow: 0 0 15px #00ff00;
-    }
-
-    .off {
-      background: #ff0000;
-      box-shadow: 0 0 15px #ff0000;
-    }
-
-    #status {
-      color: white;
-      margin-top: 20px;
-      font-size: 18px;
-    }
-  </style>
+#alvo{
+  width:50px;
+  height:50px;
+  background:red;
+  border-radius:50%;
+  position:absolute;
+  display:none;
+  box-shadow:0 0 15px red;
+}
+</style>
 </head>
 <body>
-  <div class="page-center">
-    <!-- ===== LOGIN ===== -->
-    <div class="login-box" id="login-box">
-      <h2>🔥 PAINEL FREE FIRE 🔥</h2>
-      <input id="user" placeholder="Usuário">
-      <input id="pass" type="password" placeholder="Senha">
-      <button onclick="login()">ENTRAR</button>
-      <p class="msg" id="msg"></p>
-    </div>
 
-    <!-- ===== PAINEL ===== -->
-    <div class="painel" id="painel" style="display:none;">
-      <button class="btn on" onclick="ativar()">AIM ON</button>
-      <button class="btn off" onclick="desativar()">AIM OFF</button>
-      <p id="status">Status: DESLIGADO</p>
-    </div>
+<h2>🔥 AIM TRAINER FF 🔥</h2>
+
+<div class="painel">
+  <button class="rush" onclick="presetRush()">🎯 Preset Rush</button>
+  <button class="capa" onclick="presetCapa()">💥 Preset Capa</button>
+  <button class="sniper" onclick="presetSniper()">🔵 Preset Sniper</button>
+  <div class="info" id="presetInfo">Nenhum preset ativo</div>
+</div>
+
+<div class="painel">
+  <button onclick="startTrainer()">▶️ Iniciar Aim Trainer</button>
+  <div class="info">
+    Pontos: <span id="score">0</span> |
+    Tempo: <span id="time">0</span>s
   </div>
+</div>
 
-  <script>
-    /* ===== LOGIN ===== */
-    const USUARIO = "eduoliveer";
-    const SENHA = "956774740@Ab";
+<div id="arena">
+  <div id="alvo"></div>
+</div>
 
-    function login() {
-      const userInput = document.getElementById("user").value;
-      const passInput = document.getElementById("pass").value;
-      const msg = document.getElementById("msg");
-      const loginBox = document.getElementById("login-box");
-      const painel = document.getElementById("painel");
+<script>
+let score = 0;
+let time = 0;
+let timer;
+let velocidade = 1200;
 
-      if(userInput === USUARIO && passInput === SENHA) {
-        localStorage.setItem("logado", "sim");
-        // Mostrar painel e esconder login
-        loginBox.style.display = "none";
-        painel.style.display = "block";
-      } else {
-        msg.innerText = "Usuário ou senha incorretos";
-      }
-    }
+/* ===== PRESETS ===== */
+function presetRush(){
+  velocidade = 700;
+  localStorage.setItem("preset","Rush");
+  presetInfo.innerText = "Preset Rush ativo (rápido)";
+}
 
-    /* ===== PAINEL ===== */
-    function ativar() {
-      document.getElementById("status").innerText = "Status: ATIVADO";
-    }
+function presetCapa(){
+  velocidade = 900;
+  localStorage.setItem("preset","Capa");
+  presetInfo.innerText = "Preset Capa ativo (equilibrado)";
+}
 
-    function desativar() {
-      document.getElementById("status").innerText = "Status: DESLIGADO";
-    }
+function presetSniper(){
+  velocidade = 1300;
+  localStorage.setItem("preset","Sniper");
+  presetInfo.innerText = "Preset Sniper ativo (precisão)";
+}
 
-    /* ===== MANTER LOGIN ===== */
-    window.onload = function() {
-      if(localStorage.getItem("logado") === "sim") {
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("painel").style.display = "block";
-      }
-    }
-  </script>
+/* ===== AIM TRAINER ===== */
+function startTrainer(){
+  score = 0;
+  time = 0;
+  scoreEl.innerText = 0;
+  timeEl.innerText = 0;
+
+  clearInterval(timer);
+  timer = setInterval(()=>{
+    time++;
+    timeEl.innerText = time;
+    spawnAlvo();
+  }, velocidade);
+}
+
+function spawnAlvo(){
+  const arena = document.getElementById("arena");
+  const alvo = document.getElementById("alvo");
+
+  const x = Math.random() * (arena.clientWidth - 50);
+  const y = Math.random() * (arena.clientHeight - 50);
+
+  alvo.style.left = x + "px";
+  alvo.style.top = y + "px";
+  alvo.style.display = "block";
+}
+
+document.getElementById("alvo").onclick = ()=>{
+  score++;
+  scoreEl.innerText = score;
+  alvo.style.display = "none";
+};
+
+/* ===== ELEMENTOS ===== */
+const scoreEl = document.getElementById("score");
+const timeEl = document.getElementById("time");
+const presetInfo = document.getElementById("presetInfo");
+
+/* ===== CARREGAR PRESET ===== */
+window.onload = ()=>{
+  const p = localStorage.getItem("preset");
+  if(p){
+    presetInfo.innerText = "Preset ativo: " + p;
+  }
+}
+</script>
+
 </body>
 </html>
