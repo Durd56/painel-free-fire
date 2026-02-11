@@ -42,14 +42,22 @@
   margin-top: 20px;
   font-size: 18px;
 }
-</style>
-body {
-  background: radial-gradient(circle, #0f0f0f, #000);
-  font-family: Arial, sans-serif;
+  .page-center {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  overflow-x: hidden;
+}
+.login-box {
+  max-width: 320px;
+  width: 90%;
+}
+</style>
+body {
+  <body>
+  <div class="page-center">
 }
 
 .login-box {
@@ -130,7 +138,6 @@ button{
 </head>
 
 <body>
-  <body>
   <div class="page-center">
     <div class="login-box">
 
@@ -164,5 +171,6 @@ function desativar() {
   document.getElementById("status").innerText = "Status: DESLIGADO";
 }
 </script>
+</div>
 </body>
 </html>
